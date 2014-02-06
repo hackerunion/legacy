@@ -1,0 +1,8 @@
+{
+  "email": "example@example.com",
+  "name": "John Doe Three",
+  "skills": ["breathing", "sleeping"],
+  "twitter": "http://example.com/kimkardashian",
+  "github": "brandondiamond",
+  "projects": ["breathing", "sleeping"]
+}

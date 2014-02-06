@@ -8,7 +8,7 @@ data directory structure
 chapters/
 └── new_york
     ├── events
-    └── people
+    └── users
         ├── brandon.json
         └── jeremy.json
 </pre>
