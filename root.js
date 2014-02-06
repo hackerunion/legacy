@@ -40,7 +40,10 @@ function chapter_directory(req, res) {
     var data = [];
 
     for (var i=0; i<files.length; i++) {
-      data.push(require('./chapters/' + req.params.chapter_name + '/' + req.params.directory + '/' + files[i]));
+      try {
+        var d = require('./chapters/' + req.params.chapter_name + '/' + req.params.directory + '/' + files[i]);
+        data.push(d)
+      } catch(exception) {}
     }
 
     res.json(200, data);
