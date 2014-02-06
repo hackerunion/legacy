@@ -1,0 +1,20 @@
+/* ========================================================= Structure ===*/
+.container {
+	/*background-color: #F7F6F5;*/
+	margin: 0 auto;
+}
+.container:before, .container:after, .content:before, .content:after { content: ""; display: table;}
+.container:after, .content:after { clear: both;}
+.container, .content { zoom: 1;}
+
+
+.g1,.g1_5,.g2,.g3,.g4 {
+	float: left;
+	padding: 0 1em;
+	width: 100%;
+}
+
+	.g1{max-width: 100%}
+	.g2{max-width: 100%}
+	.g3{max-width: 100%}
+	.g4{max-width: 100%}

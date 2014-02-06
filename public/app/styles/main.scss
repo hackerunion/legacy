@@ -1,3 +1,5 @@
+@import "structure";
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -84,4 +86,20 @@ body {
     .jumbotron {
         border-bottom: 0;
     }
+}
+
+/* ========================================================= Adapt ===*/
+@media all and (min-width: 41em) {
+  .g1{max-width: 50%}
+  .g1_5{max-width: 33%;}
+  .g2{max-width: 50%}
+  .g3{max-width: 50%}
+  .g4{max-width: 100%}
+}
+@media all and (min-width: 960px) {
+  .container {max-width: 960px}
+  .g1{max-width: 25%}
+  .g2{max-width: 50%}
+  .g3{max-width: 75%}
+  .g4{max-width: 100%}
 }
