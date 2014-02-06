@@ -7,4 +7,16 @@ angular.module('huRootApp')
       'AngularJS',
       'Karma'
     ];
-  });
+  })
+  .controller('TeamListCtrl', function ($scope, IpAddress) {
+
+    $scope.addresses = IpAddress.get();
+
+    $scope.fruits = [
+        'Apple',
+        'Banana',
+        'Cherry'
+    ];
+  })
+
+;
