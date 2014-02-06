@@ -6,8 +6,17 @@ var app = express();
 app.set('port', process.env.PORT || 3001);
 
 app.get('/api/chapters', chapters);
-app.get('/api/chapters/:chapter_name', chapter);
-app.get('/api/chapters/:chapter_name/:directory', chapter_directory);
+app.get('/api/chapters/:chapter_name', sanitize, chapter);
+app.get('/api/chapters/:chapter_name/:directory', sanitize, chapter_directory);
+
+function sanitize(req, res, next) {
+  for (var key in req.params) {
+    if (req.params[key].indexOf(".") > -1) {
+      return res.json(400, "Bad request");
+    }
+  }
+  next();
+}
 
 function chapters(req, res) {
   function callback(err, files) {
@@ -37,24 +46,9 @@ function chapter_directory(req, res) {
     res.json(200, data);
   }
 
-  fs.readdir('chapters/' +
-   req.params.chapter_name + '/' + req.params.directory, callback);
+  fs.readdir('chapters/' + req.params.chapter_name + '/' + req.params.directory, callback);
 }
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-
-// http.createServer(function (req, res) {
-//   res.writeHead(200, {'Content-Type': 'text/plain'});
-
-//   function callback(err, files) {
-//     res.end(files.toString());
-//   }
-
-//   fs.readdir('users', callback)
-
-// }).listen(1337, '127.0.0.1');
-
-// console.log('Server running at http://127.0.0.1:1337/');
