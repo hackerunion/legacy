@@ -1,0 +1,8 @@
+{
+  "email": "boisvert@gmail.com",
+  "name": "Tim Boisvert",
+  "skills": ["Ruby", "Rails", "Objective-C", "DevOps", "Javascript", "Eating"],
+  "twitter": "timboisvert",
+  "github": "timboisvert",
+  "projects": ["Kilt", "Metaphor", "Urchin", "NiceNiceJPG", "Juvenile", "Copenhagen"]
+}
