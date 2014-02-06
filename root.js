@@ -7,14 +7,14 @@ app.set('port', process.env.PORT || 3001);
 
 app.get('/hello', hello);
 
-app.get('/api', api);
+app.get('/api/chapters/:chapter_name', chapter);
 
 function hello(req, res) {
   res.send(200, "Hello!!!!!");
 }
 
-function api(req, res) {
-  res.send(200, "Hello!!!!!");
+function chapter(req, res) {
+  res.json(200, [{chapter: req.params.chapter_name}]);
 }
 
 http.createServer(app).listen(app.get('port'), function(){
