@@ -1,10 +1,11 @@
 {
   "name": "root",
-  "version": "0.0.0",
+  "version": "0.0.0-3",
   "description": "Website for the hackerunion craziness",
   "main": "root.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node root.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,12 @@
   "homepage": "https://github.com/hackerunion/root",
   "dependencies": {
     "express": "~3.4.8"
+  },
+  "subo": "hackerunion",
+  "domains": [
+    "hackerunion.org"
+  ],
+  "engines": {
+    "node": "0.10.x"
   }
 }
