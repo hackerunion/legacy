@@ -23,7 +23,7 @@
   "dependencies": {
     "express": "~3.4.8"
   },
-  "subo": "hackerunion",
+  "subdomain": "hackerunion",
   "domains": [
     "hackerunion.org"
   ],
