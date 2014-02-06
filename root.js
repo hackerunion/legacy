@@ -7,7 +7,7 @@ app.set('port', process.env.PORT || 3001);
 
 app.get('/api/chapters', chapters);
 app.get('/api/chapters/:chapter_name', chapter);
-// app.get('/api/chapters/:chapter_name/users', chapter_users);
+app.get('/api/chapters/:chapter_name/:directory', chapter_directory);
 
 function chapters(req, res) {
   function callback(err, files) {
@@ -23,6 +23,22 @@ function chapter(req, res) {
   }
 
   fs.readdir('chapters/' + req.params.chapter_name, callback);
+}
+
+function chapter_directory(req, res) {
+
+  function callback(err, files) {
+    var data = [];
+
+    for (var i=0; i<files.length; i++) {
+      data.push(require('./chapters/' + req.params.chapter_name + '/' + req.params.directory + '/' + files[i]));
+    }
+
+    res.json(200, data);
+  }
+
+  fs.readdir('chapters/' +
+   req.params.chapter_name + '/' + req.params.directory, callback);
 }
 
 http.createServer(app).listen(app.get('port'), function(){
