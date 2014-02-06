@@ -6,7 +6,7 @@ var app = express();
 app.set('port', process.env.PORT || 3001);
 
 app.get('/api/chapters', chapters);
-// app.get('/api/chapters/:chapter_name', chapter);
+app.get('/api/chapters/:chapter_name', chapter);
 // app.get('/api/chapters/:chapter_name/users', chapter_users);
 
 function chapters(req, res) {
@@ -15,6 +15,14 @@ function chapters(req, res) {
   }
 
   fs.readdir('chapters', callback);
+}
+
+function chapter(req, res) {
+  function callback(err, files) {
+    res.json(200, files);
+  }
+
+  fs.readdir('chapters/' + req.params.chapter_name, callback);
 }
 
 http.createServer(app).listen(app.get('port'), function(){
