@@ -1,1 +1,9 @@
-{"name": "Brandon Diamond", "age": 47}
+{
+  "email": "theevilgeek@gmail.com",
+  "name": "Brandon T. Diamond",
+  "skills": ["Organizing", "Computer Science", "Entrepreneurship"],
+  "twitter": "brandondiamond",
+  "github": "brandondiamond",
+  "projects": ["hackerunion"],
+  "v": 0
+}

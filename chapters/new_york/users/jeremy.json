@@ -4,5 +4,6 @@
   "skills": ["Scala", "JVM", "Ansible", "DevOps", "Rails"],
   "twitter": "jeremychase",
   "github": "jeremychase",
-  "projects": ["kinja", "dynaimg"]
+  "projects": ["kinja", "dynaimg"],
+  "v": 0
 }

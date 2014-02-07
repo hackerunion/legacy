@@ -4,5 +4,6 @@
   "skills": ["Ruby", "Rails", "Objective-C", "DevOps", "Javascript", "Eating"],
   "twitter": "timboisvert",
   "github": "timboisvert",
-  "projects": ["Kilt", "Metaphor", "Urchin", "NiceNiceJPG", "Juvenile", "Copenhagen"]
+  "projects": ["Kilt", "Metaphor", "Urchin", "NiceNiceJPG", "Juvenile", "Copenhagen"],
+  "v": 0
 }
