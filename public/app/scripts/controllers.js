@@ -1,10 +1,8 @@
 
-function MainCntl($scope, $location, HTTPService) {
+function BaseCntl($scope, $location, HTTPService) {
 	$scope.domain = window.location.origin;
 
 	$scope.chapters;
-	$scope.users;
-	$scope.events;
 
 	var getChapters = function() {
 		HTTPService.getChapters().then(function(data) {
@@ -19,19 +17,27 @@ function MainCntl($scope, $location, HTTPService) {
 
 	var init = function() {
 		getChapters();
-		HTTPService.getUsers("new_york").then(function(data) {
-			console.log('users', data);
-		});
-
-		HTTPService.getEvents("new_york").then(function(data) {
-			console.log('events', data)
-		})
 	}
 	init();
 }
 
-function TeamsCntl($scope) {
-	console.log('TeamsCntl')
+function ChapterCntl($scope, $routeParams, HTTPService) {
+	$scope.chapterName = $routeParams.chapterName;
+	$scope.users;
+	$scope.events;
+
+	var init = function() {
+		HTTPService.getUsers($scope.chapterName).then(function(data) {
+			console.log('users', data);
+			$scope.users = data;
+		});
+
+		HTTPService.getEvents($scope.chapterName).then(function(data) {
+			console.log('events', data);
+			$scope.events = data;
+		});
+	}
+	init();
 }
 
 
