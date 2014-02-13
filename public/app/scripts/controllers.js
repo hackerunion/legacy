@@ -17,23 +17,27 @@ function BaseCntl($scope, $location, HTTPService) {
 
 	var init = function() {
 		getChapters();
-		HTTPService.getUsers("new_york").then(function(data) {
-			console.log('users', data);
-		});
-
-		HTTPService.getEvents("new_york").then(function(data) {
-			console.log('events', data)
-		})
 	}
 	init();
 }
 
-function ChapterCntl($scope, $routeParams) {
-	$scope.chapter = $routeParams.chapterName;
+function ChapterCntl($scope, $routeParams, HTTPService) {
+	$scope.chapterName = $routeParams.chapterName;
 	$scope.users;
 	$scope.events;
 
-	console.log('ChapterCntl', $routeParams)
+	var init = function() {
+		HTTPService.getUsers($scope.chapterName).then(function(data) {
+			console.log('users', data);
+			$scope.users = data;
+		});
+
+		HTTPService.getEvents($scope.chapterName).then(function(data) {
+			console.log('events', data);
+			$scope.events = data;
+		});
+	}
+	init();
 }
 
 
