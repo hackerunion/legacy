@@ -22,7 +22,6 @@
   "homepage": "https://github.com/hackerunion/root",
   "dependencies": {
     "express": "~3.4.8",
-    "level-ws": "0.0.0",
     "level-sublevel": "~5.2.0",
     "level": "~0.18.0"
   },
@@ -34,6 +33,7 @@
     "node": "0.10.x"
   },
   "devDependencies": {
-    "joi": "~2.7.0"
+    "joi": "~2.7.0",
+    "tape": "~2.4.2"
   }
 }
