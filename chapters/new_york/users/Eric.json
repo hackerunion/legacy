@@ -1,1 +1,17 @@
-blah
+Members
+-------
+
+This directory contains user information for all members of this chapter.
+
+Schema (version 0):
+
+{
+  "email": "ericschles@gmail.com",
+  "name": "Eric Schles",
+  "skills": ["statistics"],
+  "twitter": "@EricSchles",
+  "github": "EricSchles",
+  "projects": ["human traffficking web scrapping"],
+  "url": "example.com",
+  "v": 0
+}
