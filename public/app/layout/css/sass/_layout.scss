@@ -6,7 +6,7 @@ $green: #29ff82;
 
 body {
     margin: 0;
-    background: black;
+    background: #272928 url(../img/lines.png);
     font-family: "Andale Mono", AndaleMono, monospace;
     
     .container {
@@ -28,7 +28,6 @@ body {
             }
         
             .nav {
-                background: #404040;
                 width: 20%;
                 
                 .title {
@@ -73,7 +72,6 @@ body {
             }
         
             .content {
-                background: #333333;
                 width: 80%;
                 height: 100%;
                 overflow-y: scroll;
