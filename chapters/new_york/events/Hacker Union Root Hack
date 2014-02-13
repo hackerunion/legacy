@@ -1,0 +1,18 @@
+Hacker Union Write Up
+2/12/14
+
+The new Hacker Union site is live. More than a dozen developers hacked together the site over the past three weeks. Our goal was to build something lightweight, modular, and flexible. 
+
+The new Hacker Union website is a sandbox for sharing projects and connecting people. We’re using GitHub as our database, and data is pulled to our site through an API. Anyone can contribute to or edit the site through pull requests. 
+
+Brandon and Eric constructed a set of conventions for handling various file types. Standard files, such as markdown files, are stylized and displayed. Any Javascript becomes an executable resource within the site. Anyone can submit files, and the Hacker Union is generally cool with any non-malicious code. 
+
+Members are encouraged to change any aspect of the system- there are no hard rules. Aidan, Eric, and David began building out the basic conventions. Cedric and Brandon worked on the JavaScript implementation. 
+
+Jeremy, Jarrett, and Alex built a sweet API for drawing data from the GitHub repo, using a Node server. All of the new data is parsed via Travis to ensure that it is properly formatted. Any change that is made to the master branch triggers an automatic deploy. 
+
+Alex, Cedric, Jesse, Brian, and David built out the front end in Angular. Their primary motivation for using Angular was that nobody knew how to use it, so they thought, “fuck it, let’s try something new.” 
+
+Tim and Ilana implemented Kennedy’s design for the site. Everyone was in agreement that the site should feel like a terminal, with a dark theme. The palette was set, the HTML and CSS built, Angular connected the dots, and the API is pulling .JSON data directly from the repo. 
+
+The whole crew that built the new Hacker Union site is now on our members page. Join the Hacker Union by going to GitHub and adding your profile into the users folder! 
