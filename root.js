@@ -8,6 +8,7 @@ app.set('port', process.env.PORT || 3001);
 app.get('/api/chapters', chapters);
 app.get('/api/chapters/:chapter_name', sanitize, chapter);
 app.get('/api/chapters/:chapter_name/:directory', sanitize, chapter_directory);
+app.use(express.static(__dirname + '/public/app'));
 
 function sanitize(req, res, next) {
   for (var key in req.params) {
