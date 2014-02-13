@@ -101,12 +101,12 @@ body {
             }
         
             .content {
-                background: darken($gray, 1%) url(../img/grid.svg);
+                background: darken($gray, 1%) url(../img/grid.png);
                 position: absolute;
                 margin: 0 0 0 330px;
                 overflow-y: auto;
                 padding: 20px;
-                color: $green;
+                word-wrap: break-word;
             }
         }
         
