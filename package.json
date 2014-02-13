@@ -4,7 +4,7 @@
   "description": "Website for the hackerunion craziness",
   "main": "root.js",
   "scripts": {
-    "test": "node tests/tape/*-test.js",
+    "test": "node tests/*-test.js",
     "start": "node root.js"
   },
   "repository": {
@@ -30,5 +30,8 @@
   ],
   "engines": {
     "node": "0.10.x"
+  },
+  "devDependencies": {
+    "joi": "~2.7.0"
   }
 }
