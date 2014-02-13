@@ -1,4 +1,5 @@
 $green: #29ff82;
+$gray: #272928;
 
 * {
     box-sixing: border-box;
@@ -6,7 +7,7 @@ $green: #29ff82;
 
 body {
     margin: 0;
-    background: #272928 url(../img/lines.svg);
+    background: $gray url(../img/lines.svg);
     font-family: "Andale Mono", AndaleMono, monospace;
     
     .container {
@@ -44,10 +45,10 @@ body {
                     .list {
                         height: 100%;
                         overflow-y: scroll;
-                        padding: 10px;
+                        padding: 10px 10px 10px 0px;
                         
                         ul {
-                            padding-left: 10px;
+                            padding-left: 20px;
                             
                             li {
                                 color: $green;
@@ -75,9 +76,12 @@ body {
             }
         
             .content {
+                background: darken($gray, 1%) url(../img/grid.png);
                 width: 80%;
                 height: 100%;
                 overflow-y: scroll;
+                padding: 20px;
+                color: $green;
             }
         }
         
