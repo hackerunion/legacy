@@ -1,3 +1,5 @@
+$green: #29ff82;
+
 * {
     box-sixing: border-box;
 }
@@ -5,6 +7,7 @@
 body {
     margin: 0;
     background: black;
+    font-family: "Andale Mono", AndaleMono, monospace;
     
     .container {
         position: absolute;
@@ -31,7 +34,7 @@ body {
                 .title {
                     position: fixed;
                     padding: 10px;
-                    color: #29ff82;
+                    color: $green;
                 }
                 
                 .list-wrapper {
@@ -42,6 +45,27 @@ body {
                     .list {
                         height: 100%;
                         overflow-y: scroll;
+                        padding: 10px;
+                        
+                        ul {
+                            padding-left: 10px;
+                            
+                            li {
+                                color: $green;
+                                font-size: 15px;
+                                line-height: 24px;
+                                
+                                a {
+                                    
+                                    &:hover {
+                                        color: lighten($green, 20%);
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
+                        
                     }
 
                 }
