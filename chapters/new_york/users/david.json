@@ -1,0 +1,8 @@
+{
+  "email": "beta@alumni.rice.edu",
+  "name": "David Newell",
+  "skills": ["JavaScript", "Vim"],
+  "github": "rustedgrail",
+  "projects": ["Local-Muse", "Deployment-Groove", "MMODB"],
+  "v": 0
+}
