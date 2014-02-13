@@ -26,3 +26,13 @@ chapters/
         ├── brandon.json
         └── jeremy.json
 </pre>
+
+Setup
+=====
+
+To run the app locally, run
+
+```bash
+script/bootstrap
+node root.js
+```
