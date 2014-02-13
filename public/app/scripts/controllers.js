@@ -1,10 +1,8 @@
 
-function MainCntl($scope, $location, HTTPService) {
+function BaseCntl($scope, $location, HTTPService) {
 	$scope.domain = window.location.origin;
 
 	$scope.chapters;
-	$scope.users;
-	$scope.events;
 
 	var getChapters = function() {
 		HTTPService.getChapters().then(function(data) {
@@ -30,8 +28,12 @@ function MainCntl($scope, $location, HTTPService) {
 	init();
 }
 
-function TeamsCntl($scope) {
-	console.log('TeamsCntl')
+function ChapterCntl($scope, $routeParams) {
+	$scope.chapter = $routeParams.chapterName;
+	$scope.users;
+	$scope.events;
+
+	console.log('ChapterCntl', $routeParams)
 }
 
 

@@ -28,10 +28,17 @@
 
 </head>
 <body ng-controller="BaseCntl">
-  <pre>Chapters: {{chapters}}</pre>
-  <pre>NYC Users: {{users}}</pre>
-  <pre>NYC events: {{events}}</pre>
+    <a href="/">HOME</a>
+    <br />
 
+    <pre>Chapters: {{chapters}}</pre>
+
+    Chapters:
+    <div ng-repeat="chapter in chapters">
+        <a ng-href="/chapters/{{chapter}}">{{chapter}}</a>
+    </div>
+
+    <hr />
 
 
     <div ng-view></div>
