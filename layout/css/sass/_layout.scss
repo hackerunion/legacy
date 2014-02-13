@@ -29,14 +29,23 @@ body {
                 width: 20%;
                 
                 .title {
+                    position: fixed;
                     padding: 10px;
                     color: #29ff82;
                 }
                 
-                .list {
+                .list-wrapper {
+                    
                     height: 100%;
-                    overflow-y: scroll;
+                    padding-top: 34px;
+                    
+                    .list {
+                        height: 100%;
+                        overflow-y: scroll;
+                    }
+
                 }
+                
             }
         
             .content {
