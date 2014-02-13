@@ -3,11 +3,12 @@
 <head>
     <base href="/">
     <meta charset="utf-8">
-    <title>Hacker Union</title>
+    <title>Le Hacker Union MMXIV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Hacker Union">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <!-- stylesheets -->
+    <link rel="stylesheet" href="/layout/css/screen.css">
 
 
     <!-- javascript -->
@@ -28,22 +29,55 @@
 
 </head>
 <body ng-controller="BaseCntl">
-    <a href="/">HOME</a>
-    <br />
-
-    <pre>Chapters: {{chapters}}</pre>
-
-    Chapters:
-    <div ng-repeat="chapter in chapters">
-        <a ng-href="/chapters/{{chapter}}">{{chapter}}</a>
-    </div>
-
-    <hr />
-
-
-    <div ng-view></div>
-
-
-
+    
+<div class="container">
+    
+    <header>
+        
+    </header>
+    
+    <section class="main">
+        
+        <section class="nav">
+            <a href="/" class="title">
+                Hacker Union
+            </a>
+            <div class="list-wrapper">
+                <div class="list">
+                    <ul>
+                        <li>Chapters</li>
+                        <li>
+                            <ul>
+                                <li ng-repeat="chapter in chapters">
+                                    <a ng-href="/chapters/{{chapter}}">{{chapter}}</a>
+                                </li>
+                                <li>
+                                    <a>Helsinki</a>
+                                </li>
+                                <li>
+                                    <a>Ulaan Bataar</a>
+                                </li>
+                                <li>
+                                    <a>San Bernardino</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content">
+            <div ng-view></div>
+        </section>
+        
+    </section>
+    
+    <footer>
+    
+    </footer>
+    
+</div>
+    
 </body>
 </html>
