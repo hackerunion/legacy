@@ -1,21 +1,16 @@
-'use strict';
+/* route handling file */
+var RootApp = angular.module('RootApp', ['ngRoute'])
 
-angular.module('huRootApp', [
-  'ngResource',
-  'ngRoute',
-  'huRootApp.services'
-])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/teams', {
-        templateUrl: 'views/teams.html',
-        controller: 'TeamListCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+	.config(function($locationProvider) {
+		
+		$locationProvider.html5Mode(true);
+
+	})
+
+	.config(function($provide) {
+	
+		// register services 
+		$provide.factory('HTTPService', HTTPService);
+
+	});
+		

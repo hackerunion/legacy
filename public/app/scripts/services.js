@@ -1,24 +1,57 @@
-'use strict';
 
-/* Services */
 
-var rootServices = angular.module('huRootApp.services', ['ngResource']);
 
-rootServices.value('version', '0.1');
+var HTTPService = function($http, $q){
 
-rootServices.factory('IpAddress', function($resource) {
-  //return $resource('https://api.twitter.com/1/statuses/:action',
-  return $resource("http://ip.jsontest.com/");
-  // {
-  //   action: 'user_timeline.json',
-  //   screen_name: 'cogell',
-  //   count: '10',
-  //   include_rts: '1',
-  //   callback: 'JSON_CALLBACK'
-  // }, {
-  //   get:{
-  //     method:'JSONP',
-  //     isArray: true
-  //   }});
-});
+  return {
+
+    http: function(method, url, data) {
+      var deferred = $q.defer();
+      $http({
+        method: method,
+        url: url,
+        data: (data || {}),
+      })
+      .success(function(returnedData){
+        deferred.resolve(returnedData);
+      })
+      .error(function(returnedData) { 
+        console.log('API ERROR')
+        console.log(returnedData);
+        deferred.reject(returnedData);
+      });
+      return deferred.promise;
+    },
+
+    httpGET: function(url) {
+      return this.http('GET', url, null);
+    },
+    httpPOST: function(url, data) {
+      return this.http('POST', url, data);
+    },
+    httpPUT: function(url, data) {
+      return this.http('PUT', url, data);
+    },
+    httpDELETE: function(url) {
+      return this.http('DELETE', url, null);
+    },
+
+    getChapters: function() {
+      return this.httpGET("/api/chapters");
+    },
+    getUsers: function(chapter) {
+      return this.httpGET("/api/chapters/" + chapter + "/users");
+    },
+    getEvents: function(chapter) {
+      return this.httpGET("/api/chapters/" + chapter + "/events");
+    },
+
+  }
+};
+
+
+
+
+
+
 

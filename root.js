@@ -2,8 +2,15 @@
 var http = require('http');
 var fs = require('fs');
 var express = require('express');
+var path = require('path');
 var app = express();
 app.set('port', process.env.PORT || 3001);
+
+app.use(express.static(path.join(__dirname, '/public/app')));
+
+app.get('/', function(req, res) {
+  res.sendfile('public/app/base.html');
+});
 
 app.get('/api/chapters', chapters);
 app.get('/api/chapters/:chapter_name', sanitize, chapter);
