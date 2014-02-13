@@ -85,7 +85,7 @@ function chapter_directory(req, res) {
 }
 
 function notFound(err, res) {
- //
+  //
   // TODO: send better error responses
   //
   res.writeHead(500, { 'content-type': 'application/json' });
