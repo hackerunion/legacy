@@ -4,7 +4,7 @@
   "description": "Website for the hackerunion craziness",
   "main": "root.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node tests/tape/*-test.js",
     "start": "node root.js"
   },
   "repository": {
@@ -30,8 +30,5 @@
   ],
   "engines": {
     "node": "0.10.x"
-  },
-  "scripts": {
-    "test": "node tests/tape/*-test.js"
   }
 }
