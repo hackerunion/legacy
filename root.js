@@ -12,6 +12,9 @@ app.use(express.static(path.join(__dirname, '/public/app')));
 app.get('/', function(req, res) {
   res.sendfile('public/app/base.html');
 });
+app.get('/chapters/:chapterName', function(req, res) {
+  res.sendfile('public/app/base.html');
+});
 
 app.get('/api/chapters', chapters);
 app.get('/api/chapters/:chapter_name', sanitize, chapter);
