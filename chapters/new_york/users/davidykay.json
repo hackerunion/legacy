@@ -1,0 +1,10 @@
+{
+  "email": "davidykay@gmail.com",
+  "name": "David Y. Kay",
+  "skills": ["iOS", "Android", "Clojure"],
+  "twitter": "davidykay",
+  "github": "davidykay",
+  "projects": ["gargoyle.co", "WeSoHungry.com"],
+  "url": "gargoyle.co",
+  "v": 0
+}
