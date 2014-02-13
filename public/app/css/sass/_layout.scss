@@ -39,7 +39,7 @@ body {
                 .list-wrapper {
                     
                     height: 100%;
-                    padding-top: 34px;
+                    padding-top: 84px;
                     
                     .list {
                         height: 100%;
@@ -55,9 +55,12 @@ body {
                                 line-height: 24px;
                                 
                                 a {
-                                    
+                                    color: $green;
+                                    text-decoration: none;
+                                        
                                     &:hover {
                                         color: lighten($green, 20%);
+                                        text-decoration: none;
                                     }
                                     
                                 }
