@@ -7,8 +7,15 @@ var path = require('path');
 var app = express();
 app.set('port', process.env.PORT || 3001);
 
-app.use(express.static(path.join(__dirname, '/public/app')));
+// Allow reading the files directly. express.directory and express.static
+// work together to make a file browser
+app.use('/raw', express.directory(__dirname));
+app.use('/raw', express.static(__dirname));
 
+// Serve static assets
+app.use('/', express.static(path.join(__dirname, '/public/app')));
+
+// Routes for serving our HTML pages
 app.get('/', function(req, res) {
   res.sendfile('public/app/base.html');
 });
@@ -16,10 +23,10 @@ app.get('/chapters/:chapterName', function(req, res) {
   res.sendfile('public/app/base.html');
 });
 
+// API routes
 app.get('/api/chapters', chapters);
 app.get('/api/chapters/:chapter_name', sanitize, chapter);
 app.get('/api/chapters/:chapter_name/:directory', sanitize, chapter_directory);
-app.use(express.static(__dirname + '/public/app'));
 
 function sanitize(req, res, next) {
   for (var key in req.params) {
