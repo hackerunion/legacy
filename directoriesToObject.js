@@ -21,8 +21,18 @@ module.exports = chapters.reduce(function (acc, chapter) {
   acc[chapter] = fs.readdirSync(chapterDir).reduce(function (paths, resource) {
     var resourceDir = path.join(chapterDir, resource);
     paths[resource] = fs.readdirSync(resourceDir).map(function(file) {
-      return path.join(resourceDir, file);
-    });
+      if (!/.json$/.test(file)) {
+        return null;
+      }
+      var json;
+      //
+      // LETS MAKE SURE WE HAVE VALID JSON JUST TO BE SURE GUYS
+      //
+      try { json = require(path.join(resourceDir, file)) }
+      catch (ex) { json = null }
+
+      return json;
+    }).filter(Boolean);
     return paths;
   }, {});
   return acc;
