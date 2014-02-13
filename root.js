@@ -66,8 +66,8 @@ function chapter_directory(req, res) {
       return /.json$/.test(file);
     }).map(function (file) {
       var d;
-      try { d = require(path.join(root, file)) }
-      catch (ex) { d = null }
+      try { d = require(path.join(root, file)); }
+      catch (ex) { d = null; }
       return d;
     }).filter(Boolean);
 
