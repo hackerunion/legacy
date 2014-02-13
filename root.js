@@ -32,6 +32,9 @@ function sanitize(req, res, next) {
 
 function chapters(req, res) {
   function callback(err, files) {
+    if (err) {
+      return notFound(err, res);
+    }
     res.json(200, files);
   }
 
@@ -40,6 +43,9 @@ function chapters(req, res) {
 
 function chapter(req, res) {
   function callback(err, files) {
+    if (err) {
+      return notFound(err, res);
+    }
     res.json(200, files);
   }
 
@@ -49,6 +55,9 @@ function chapter(req, res) {
 function chapter_directory(req, res) {
 
   function callback(err, files) {
+    if (err) {
+      return notFound(err, res);
+    }
     //
     // Validate the files are json before we try and load them
     //
@@ -66,6 +75,14 @@ function chapter_directory(req, res) {
   }
 
   fs.readdir('chapters/' + req.params.chapter_name + '/' + req.params.directory, callback);
+}
+
+function notFound(err, res) {
+ //
+  // TODO: send better error responses
+  //
+  res.writeHead(500, { 'content-type': 'application/json' });
+  return res.end(JSON.stringify({ error: err.message, reason: 'invalid parameters'}));
 }
 
 http.createServer(app).listen(app.get('port'), function(){
