@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="RootApp">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>Hacker Union</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Hacker Union">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <!-- stylesheets -->
+
+
+    <!-- javascript -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    <!-- angular 1.2 has route as its own module -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+
+
+
+
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/routes.js"></script>
+    <script src="/scripts/controllers.js"></script>
+    <script src="/scripts/services.js"></script>
+
+</head>
+<body ng-controller="BaseCntl">
+  <pre>Chapters: {{chapters}}</pre>
+  <pre>NYC Users: {{users}}</pre>
+  <pre>NYC events: {{events}}</pre>
+
+
+
+    <div ng-view></div>
+
+
+
+</body>
+</html>
