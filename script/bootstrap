@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+npm install
+
+
+cd public
+
+npm install
+
+npm install -g bower
+bower install
+
+gem install bundler
+bundle install
+
+npm install -g grunt-cli
+grunt build
+
+cd -
