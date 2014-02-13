@@ -25,22 +25,31 @@ body {
             .nav, 
             .content {
                 height: 100%;
-                float: left;
             }
         
             .nav {
-                width: 20%;
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 300px;
+                z-index: 10;
                 
-                .title {
-                    position: fixed;
+                .title-wrapper {
+
                     padding: 10px;
-                    color: $green;
+                    
+                    .title {
+                        padding: 10px;
+                        color: $green;
+                        border-top: 3px double $green;
+                        border-bottom: 3px double $green;
+                    }
                 }
                 
                 .list-wrapper {
                     
                     height: 100%;
-                    padding-top: 84px;
                     
                     .list {
                         height: 100%;
@@ -77,8 +86,11 @@ body {
         
             .content {
                 background: darken($gray, 1%) url(../img/grid.png);
-                width: 80%;
+                position: relative;
+                left: 0;
+                top: 0;
                 height: 100%;
+                margin: 0 0 0 330px;
                 overflow-y: scroll;
                 padding: 20px;
                 color: $green;
