@@ -6,7 +6,7 @@ var express = require('express');
 var level = require('level');
 var sublevel = require('level-sublevel');
 
-var db = sublevel(level(__dirname + 'database'));
+var db = sublevel(level(__dirname + 'hackerunion'));
 
 var initialize = require('./initialize');
 
