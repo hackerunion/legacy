@@ -5,6 +5,12 @@ var express = require('express');
 var app = express();
 app.set('port', process.env.PORT || 3001);
 
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+})
+
 app.get('/api/chapters', chapters);
 app.get('/api/chapters/:chapter_name', sanitize, chapter);
 app.get('/api/chapters/:chapter_name/:directory', sanitize, chapter_directory);
@@ -20,7 +26,7 @@ function sanitize(req, res, next) {
 
 function chapters(req, res) {
   function callback(err, files) {
-    res.json(200, files);
+    res.json(200, {"chapters": files});
   }
 
   fs.readdir('chapters', callback);

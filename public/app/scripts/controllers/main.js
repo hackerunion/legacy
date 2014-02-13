@@ -8,15 +8,18 @@ angular.module('huRootApp')
       'Karma'
     ];
   })
-  .controller('TeamListCtrl', function ($scope, IpAddress) {
+  // .controller('TeamListCtrl', function ($scope, IpAddress) {
 
-    $scope.addresses = IpAddress.get();
+  //   $scope.addresses = IpAddress.get();
 
-    $scope.fruits = [
-        'Apple',
-        'Banana',
-        'Cherry'
-    ];
+  //   $scope.fruits = [
+  //       'Apple',
+  //       'Banana',
+  //       'Cherry'
+  //   ];
+  // })
+  .controller('ChapterCtrl', function ($scope, Chapters) {
+    $scope.chapters = Chapters.get();
   })
 
 ;

@@ -11,10 +11,14 @@ angular.module('huRootApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/teams', {
-        templateUrl: 'views/teams.html',
-        controller: 'TeamListCtrl'
+      .when('/chapters', {
+        templateUrl: 'views/chapters.html',
+        controller: 'ChapterCtrl'
       })
+      // .when('/teams', {
+      //   templateUrl: 'views/teams.html',
+      //   controller: 'TeamListCtrl'
+      // })
       .otherwise({
         redirectTo: '/'
       });
