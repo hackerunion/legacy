@@ -78,7 +78,7 @@ function chapter_directory(req, res) {
       return d;
     }).filter(Boolean);
 
-    res.json(200, data);
+    res.json(200, {'subdirectory':req.params.directory, data: data});
   }
 
   fs.readdir('chapters/' + req.params.chapter_name + '/' + req.params.directory, callback);

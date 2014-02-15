@@ -1,7 +1,7 @@
 <!-- this is the chapter.html file -->
 
-
 <p>CHAPTER: {{chapterName}}</p>
 
-<p>USERS: {{users}}</p>
-<p>EVENTS: {{events}}</p>
+<header ng-repeat="(subdirectory, data) in subdirectories">
+  <p>{{subdirectory | uppercase}}: {{ data }}</p>
+</header>

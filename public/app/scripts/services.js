@@ -15,7 +15,7 @@ var HTTPService = function($http, $q){
       .success(function(returnedData){
         deferred.resolve(returnedData);
       })
-      .error(function(returnedData) { 
+      .error(function(returnedData) {
         console.log('API ERROR')
         console.log(returnedData);
         deferred.reject(returnedData);
@@ -39,11 +39,11 @@ var HTTPService = function($http, $q){
     getChapters: function() {
       return this.httpGET("/api/chapters");
     },
-    getUsers: function(chapter) {
-      return this.httpGET("/api/chapters/" + chapter + "/users");
+    getChapter: function(chapter) {
+      return this.httpGET("/api/chapters/" + chapter);
     },
-    getEvents: function(chapter) {
-      return this.httpGET("/api/chapters/" + chapter + "/events");
+    getChapterSubdirectory: function(chapter, subdirectory) {
+      return this.httpGET("/api/chapters/" + chapter + "/" + subdirectory);
     },
 
   }
