@@ -72,7 +72,7 @@ function generic_handler(req, res, dirpath) {
       return fs.statSync(path.join(root, file)).isDirectory(); // TODO make async
     });
 
-    res.json(200, {'subdirectory':path.basename(root), data: data, submodules:submodules});
+    res.json(200, {'module':path.basename(root), data: data, submodules:submodules});
   }
 
   fs.readdir(dirpath, callback);

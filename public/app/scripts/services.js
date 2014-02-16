@@ -42,8 +42,8 @@ var HTTPService = function($http, $q){
     getChapter: function(chapter) {
       return this.httpGET("/api/chapters/" + chapter);
     },
-    getChapterSubdirectory: function(chapter, subdirectory) {
-      return this.httpGET("/api/chapters/" + chapter + "/" + subdirectory);
+    getChapterSubmodule: function(chapter, submodule) {
+      return this.httpGET("/api/chapters/" + chapter + "/" + submodule);
     },
 
   }

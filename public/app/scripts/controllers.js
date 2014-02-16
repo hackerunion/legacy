@@ -24,11 +24,11 @@ function ChapterCntl($scope, $routeParams, HTTPService) {
 	var init = function() {
 
 		HTTPService.getChapter($scope.chapterName).then(function(chapter) {
-			for (subdirIndex in chapter.submodules) {
-				var subdirectory = chapter.submodules[subdirIndex];
+			for (submodIndex in chapter.submodules) {
+				var submodule = chapter.submodules[submodIndex];
 
-				HTTPService.getChapterSubdirectory($scope.chapterName, subdirectory).then(function(data) {
-					$scope.subdirectories[data.subdirectory] = data.data;
+				HTTPService.getChapterSubmodule($scope.chapterName, submodule).then(function(data) {
+					$scope.subdirectories[data.module] = data.data;
 				});
 			}
 		});
