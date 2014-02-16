@@ -40,21 +40,18 @@ function sanitize(req, res, next) {
 function chapters(req, res) {
   var chapterDir = '';
 
-  function callback(err, files) {
-    if (err) {
-      return notFound(err, res);
-    }
-    res.json(200, files);
-  }
-
   if (req.params.chapter_name !== undefined) {
     chapterDir = '/' + req.params.chapter_name;
   }
 
-  fs.readdir('chapters' + chapterDir, callback);
+  generic_handler(req, res, 'chapters' + chapterDir);
 }
 
 function chapter_directory(req, res) {
+  return generic_handler(req, res, 'chapters/' + req.params.chapter_name + '/' + req.params.directory);
+}
+
+function generic_handler(req, res, dirpath) {
 
   function callback(err, files) {
     if (err) {
@@ -63,7 +60,7 @@ function chapter_directory(req, res) {
     //
     // Validate the files are json before we try and load them
     //
-    var root = path.join(__dirname, 'chapters', req.params.chapter_name, req.params.directory);
+    var root = path.join(__dirname, dirpath);
     var data  = files.filter(function (file) {
       return /.json$/.test(file);
     }).map(function (file) {
@@ -73,10 +70,14 @@ function chapter_directory(req, res) {
       return d;
     }).filter(Boolean);
 
-    res.json(200, {'subdirectory':req.params.directory, data: data});
+    var submodules = files.filter(function (file) {
+      return fs.statSync(path.join(root, file)).isDirectory(); // TODO make async
+    });
+
+    res.json(200, {'subdirectory':path.basename(root), data: data, submodules:submodules});
   }
 
-  fs.readdir('chapters/' + req.params.chapter_name + '/' + req.params.directory, callback);
+  fs.readdir(dirpath, callback);
 }
 
 function notFound(err, res) {
