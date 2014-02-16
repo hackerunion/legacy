@@ -25,7 +25,7 @@ app.get('/chapters/:chapterName', function(req, res) {
 
 // API routes
 app.get('/api/chapters', chapters);
-app.get('/api/chapters/:chapter_name', sanitize, chapters);
+app.get('/api/chapters/:chapter_name', sanitize, chapter);
 app.get('/api/chapters/:chapter_name/:directory', sanitize, chapter_directory);
 
 function sanitize(req, res, next) {
@@ -38,13 +38,11 @@ function sanitize(req, res, next) {
 }
 
 function chapters(req, res) {
-  var chapterDir = '';
+  generic_handler(req, res, 'chapters');
+}
 
-  if (req.params.chapter_name !== undefined) {
-    chapterDir = '/' + req.params.chapter_name;
-  }
-
-  generic_handler(req, res, 'chapters' + chapterDir);
+function chapter(req, res) {
+  generic_handler(req, res, 'chapters/' + req.params.chapter_name);
 }
 
 function chapter_directory(req, res) {
