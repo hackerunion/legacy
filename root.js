@@ -22,6 +22,9 @@ app.get('/', function(req, res) {
 app.get('/chapters/:chapterName', function(req, res) {
   res.sendfile('public/app/base.html');
 });
+app.get('/chapters', function(req, res) {
+  res.sendfile('public/app/base.html');
+});
 
 // API routes
 app.get('/api/chapters', chapters);
