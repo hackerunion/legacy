@@ -25,7 +25,7 @@ app.get('/chapters/:chapterName', function(req, res) {
 
 // API routes
 app.get('/api/chapters', chapters);
-app.get('/api/chapters/:chapter_name', sanitize, chapter);
+app.get('/api/chapters/:chapter_name', sanitize, chapters);
 app.get('/api/chapters/:chapter_name/:directory', sanitize, chapter_directory);
 
 function sanitize(req, res, next) {
@@ -38,6 +38,8 @@ function sanitize(req, res, next) {
 }
 
 function chapters(req, res) {
+  var chapterDir = '';
+
   function callback(err, files) {
     if (err) {
       return notFound(err, res);
@@ -45,18 +47,11 @@ function chapters(req, res) {
     res.json(200, files);
   }
 
-  fs.readdir('chapters', callback);
-}
-
-function chapter(req, res) {
-  function callback(err, files) {
-    if (err) {
-      return notFound(err, res);
-    }
-    res.json(200, files);
+  if (req.params.chapter_name !== undefined) {
+    chapterDir = '/' + req.params.chapter_name;
   }
 
-  fs.readdir('chapters/' + req.params.chapter_name, callback);
+  fs.readdir('chapters' + chapterDir, callback);
 }
 
 function chapter_directory(req, res) {
