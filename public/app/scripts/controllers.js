@@ -24,8 +24,8 @@ function ChapterCntl($scope, $routeParams, HTTPService) {
 	var init = function() {
 
 		HTTPService.getChapter($scope.chapterName).then(function(chapter) {
-			for (subdirIndex in chapter) {
-				var subdirectory = chapter[subdirIndex];
+			for (subdirIndex in chapter.submodules) {
+				var subdirectory = chapter.submodules[subdirIndex];
 
 				HTTPService.getChapterSubdirectory($scope.chapterName, subdirectory).then(function(data) {
 					$scope.subdirectories[data.subdirectory] = data.data;
