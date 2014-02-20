@@ -3,16 +3,23 @@ function BaseCntl($scope, $location, HTTPService) {
 	$scope.domain = window.location.origin;
 
 	$scope.chapters;
-
-	$scope.submodules = {};
+	/* instead of tacking the chapter's submodules onto the chapter,
+		there is a separate object to hold the submodules.
+		maps: {chapterName: submodules of chapter}
+	*/
+	$scope.submodules = {}; 
 
 	var getChapters = function() {
 		HTTPService.getChapters().then(function(data) {
-			console.log('data', data);
 			$scope.chapters = data;
 		});
 	}
+	/* please rename this function */
 	$scope.getChapterSubmodules = function(chapterName) {
+		if ($scope.submodules[chapterName]) {
+			$scope.submodules[chapterName] = null;
+			return;
+		}
 		HTTPService.getChapter(chapterName).then(function(data) {
 			$scope.submodules[chapterName] = data;
 		});
