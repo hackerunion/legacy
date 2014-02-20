@@ -7,21 +7,20 @@ function BaseCntl($scope, $location, HTTPService) {
 		there is a separate object to hold the submodules.
 		maps: {chapterName: submodules of chapter}
 	*/
-	$scope.submodules = {}; 
+	$scope.submoduleNames = {};
 
 	var getChapters = function() {
 		HTTPService.getChapters().then(function(data) {
 			$scope.chapters = data;
 		});
 	}
-	/* please rename this function */
-	$scope.getChapterSubmodules = function(chapterName) {
-		if ($scope.submodules[chapterName]) {
-			$scope.submodules[chapterName] = null;
+	$scope.getChapter = function(chapterName) {
+		if ($scope.submoduleNames[chapterName]) {
+			$scope.submoduleNames[chapterName] = null;
 			return;
 		}
 		HTTPService.getChapter(chapterName).then(function(data) {
-			$scope.submodules[chapterName] = data;
+			$scope.submoduleNames[chapterName] = data;
 		});
 	}
 
