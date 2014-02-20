@@ -27,6 +27,7 @@ app.get('/chapters', function(req, res) {
 });
 
 // API routes
+app.get('/api', api);
 app.get('/api/chapters', chapters);
 app.get('/api/chapters/:chapter_name', sanitize, chapter);
 app.get('/api/chapters/:chapter_name/:directory', sanitize, chapter_directory);
@@ -40,16 +41,20 @@ function sanitize(req, res, next) {
   next();
 }
 
+function api(req, res) {
+  generic_handler(req, res, 'api');
+}
+
 function chapters(req, res) {
-  generic_handler(req, res, 'chapters');
+  generic_handler(req, res, 'api/chapters');
 }
 
 function chapter(req, res) {
-  generic_handler(req, res, 'chapters/' + req.params.chapter_name);
+  generic_handler(req, res, 'api/chapters/' + req.params.chapter_name);
 }
 
 function chapter_directory(req, res) {
-  return generic_handler(req, res, 'chapters/' + req.params.chapter_name + '/' + req.params.directory);
+  return generic_handler(req, res, 'api/chapters/' + req.params.chapter_name + '/' + req.params.directory);
 }
 
 function generic_handler(req, res, dirpath) {
@@ -79,7 +84,7 @@ function generic_handler(req, res, dirpath) {
       return fs.statSync(path.join(root, file)).isFile(); // TODO make async
     });
 
-    res.json(200, {'module':path.basename(root), data: data, submodules:submodules, files:_files});
+    res.json(200, {'module':path.basename(root), path:path.relative(__dirname, path.dirname(root)), data: data, submodules:submodules, files:_files});
   }
 
   fs.readdir(dirpath, callback);
