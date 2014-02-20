@@ -12,7 +12,7 @@ var path = require('path');
 // the hierarchy of the folders with at the core level it contains
 // arrays of the file paths to the resources
 //
-var chaptersDir = path.join(__dirname, 'chapters');
+var chaptersDir = path.join(__dirname, 'api', 'chapters');
 
 var chapters = fs.readdirSync(chaptersDir);
 
