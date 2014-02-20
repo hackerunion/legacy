@@ -18,8 +18,14 @@ var chapters = fs.readdirSync(chaptersDir);
 
 module.exports = chapters.reduce(function (acc, chapter) {
   var chapterDir = path.join(chaptersDir, chapter);
+  if (!fs.statSync(chapterDir).isDirectory()) {
+    return acc;
+  }
   acc[chapter] = fs.readdirSync(chapterDir).reduce(function (paths, resource) {
     var resourceDir = path.join(chapterDir, resource);
+    if (!fs.statSync(resourceDir).isDirectory()) {
+      return paths;
+    }
     paths[resource] = fs.readdirSync(resourceDir).map(function(file) {
       if (!/.json$/.test(file)) {
         return null;
