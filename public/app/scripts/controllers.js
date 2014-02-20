@@ -4,10 +4,17 @@ function BaseCntl($scope, $location, HTTPService) {
 
 	$scope.chapters;
 
+	$scope.submodules = {};
+
 	var getChapters = function() {
 		HTTPService.getChapters().then(function(data) {
 			console.log('data', data);
 			$scope.chapters = data;
+		});
+	}
+	$scope.getChapterSubmodules = function(chapterName) {
+		HTTPService.getChapter(chapterName).then(function(data) {
+			$scope.submodules[chapterName] = data;
 		});
 	}
 
