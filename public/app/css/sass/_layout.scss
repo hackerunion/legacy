@@ -5,17 +5,22 @@ $gray: #272928;
     box-sixing: border-box;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 body {
     margin: 0;
-    background: darken($gray, 1%) url(../img/lines.svg);
+    background: darken($gray, 1%);
     color: $green;
     font-family: "Andale Mono", AndaleMono, monospace;
     
     .container {
-
-        header {
-            
-        }
+        
+        height: 100%;
         
         section.main {
             height: 100%;
@@ -29,7 +34,7 @@ body {
                 position: fixed;
                 height: 100%;
                 width: 330px;
-                background-color: $gray;
+                background: $gray url(../img/lines.svg);
                 
                 .title-wrapper {
 
@@ -100,13 +105,16 @@ body {
                 
             }
         
-            .content {
+            .content-wrapper {
                 background: darken($gray, 1%) url(../img/grid.png);
-                position: absolute;
-                margin: 0 0 0 330px;
-                overflow-y: auto;
-                padding: 20px;
-                word-wrap: break-word;
+                margin: 0;
+                padding: 20px 0 0 330px;
+                width: 100%;
+                height: 100%;
+                
+                .content {
+                    overflow-y: auto;
+                }
             }
         }
         
