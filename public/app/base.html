@@ -60,10 +60,16 @@
                                     <img src="/img/folder.svg" /> <a ng-click="getChapter(chapterName)" ng-href="/chapters/{{chapterName}}">{{chapterName}}</a>
                                     <ul ng-show="submoduleNames[chapterName]">
                                         <li ng-repeat="submoduleName in submoduleNames[chapterName].submodules">
-                                            <img src="/img/folder.svg"><a href="/chapters/{{chapterName}}/{{submoduleName}}">{{submoduleName}}</a>
+                                            <img src="/img/folder.svg"><a ng-click="getChapterSubmodule(chapterName, submoduleName)" href="/chapters/{{chapterName}}/{{submoduleName}}">{{submoduleName}}</a>
+                                            <ul ng-show="submoduleNames[chapterName]">
+                                                <li ng-repeat="file in submoduleNames[chapterName].files">
+                                                    <img src="/img/file.svg"><a href="/raw/api/chapters/{{chapterName}}/{{submoduleName}}/{{file}}">{{file}}</a>
+                                                </li>
+
+                                            </ul>
                                         </li>
                                         <li ng-repeat="file in submoduleNames[chapterName].files">
-                                            <img src="/img/file.svg"><a href="/raw/api/chapters/{{chapterName}}/{{submoduleName}}{{file}}">{{file}}</a>
+                                            <img src="/img/file.svg"><a href="/raw/api/chapters/{{chapterName}}/{{file}}">{{file}}</a>
                                         </li>
                                     </ul>
                                 </li>
