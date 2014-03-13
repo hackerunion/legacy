@@ -27,10 +27,13 @@ app.get('/chapters', function(req, res) {
 });
 
 // API routes
-app.get('/api', api);
-app.get('/api/chapters', chapters);
-app.get('/api/chapters/:chapter_name', sanitize, chapter);
-app.get('/api/chapters/:chapter_name/:directory', sanitize, chapter_directory);
+app.get('/api/*', function(req, res) {
+  generic_handler(req, res, 'api/'+req.params.join('/'));
+});
+
+app.get('/raw/*', function(req, res) {
+  res.sendfile('api/'+req.params.join('/'))
+});
 
 function sanitize(req, res, next) {
   for (var key in req.params) {
@@ -39,22 +42,6 @@ function sanitize(req, res, next) {
     }
   }
   next();
-}
-
-function api(req, res) {
-  generic_handler(req, res, 'api');
-}
-
-function chapters(req, res) {
-  generic_handler(req, res, 'api/chapters');
-}
-
-function chapter(req, res) {
-  generic_handler(req, res, 'api/chapters/' + req.params.chapter_name);
-}
-
-function chapter_directory(req, res) {
-  return generic_handler(req, res, 'api/chapters/' + req.params.chapter_name + '/' + req.params.directory);
 }
 
 function generic_handler(req, res, dirpath) {
