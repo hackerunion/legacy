@@ -5,6 +5,10 @@ var path = require('path');
 var express = require('express');
 var path = require('path');
 var app = express();
+var cons = require('consolidate');
+var lib_dir = path.join(__dirname, 'lib');
+var reducedir = require(path.join(lib_dir,'reducedir.js'));
+
 app.set('port', process.env.PORT || 3001);
 
 // Allow reading the files directly. express.directory and express.static
