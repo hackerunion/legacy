@@ -24,6 +24,18 @@ function BaseCntl($scope, $location, HTTPService) {
 		});
 	}
 
+	$scope.getChapterSubmodule = function(chapterName, submoduleName) {
+		console.log('getChapterSubmodule');
+		// if ($scope.chapterSubmodules[chapterName]) {
+		// 	$scope.chapterSubmodules[chapterName] = null;
+		// 	return;
+		// }
+
+		// HTTPService.getChapterSubmodule(chapterName).then(function(data) {
+		// 	$scope.chapterSubmodules[chapterName] = data;
+		// });
+	}
+
 	var init = function() {
 		getChapters();
 	}
