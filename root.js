@@ -13,8 +13,8 @@ app.set('port', process.env.PORT || 3001);
 
 // Allow reading the files directly. express.directory and express.static
 // work together to make a file browser
-app.use('/raw', express.directory(__dirname));
-app.use('/raw', express.static(__dirname));
+app.use('/raw', express.directory('api'));
+app.use('/raw', express.static('api'));
 
 // Serve static assets
 app.use('/', express.static(path.join(__dirname, '/public/app')));
@@ -30,13 +30,8 @@ app.get('/chapters', function(req, res) {
   res.sendfile('public/app/base.html');
 });
 
-// API routes
 app.get('/api/*', function(req, res) {
   generic_handler(req, res, 'api/'+req.params.join('/'));
-});
-
-app.get('/raw/*', function(req, res) {
-  res.sendfile('api/'+req.params.join('/'))
 });
 
 function sanitize(req, res, next) {
