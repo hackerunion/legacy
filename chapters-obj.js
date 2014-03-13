@@ -12,14 +12,20 @@ var path = require('path');
 // the hierarchy of the folders with at the core level it contains
 // arrays of the file paths to the resources
 //
-var chaptersDir = path.join(__dirname, 'chapters');
+var chaptersDir = path.join(__dirname, 'api', 'chapters');
 
 var chapters = fs.readdirSync(chaptersDir);
 
 module.exports = chapters.reduce(function (acc, chapter) {
   var chapterDir = path.join(chaptersDir, chapter);
+  if (!fs.statSync(chapterDir).isDirectory()) {
+    return acc;
+  }
   acc[chapter] = fs.readdirSync(chapterDir).reduce(function (paths, resource) {
     var resourceDir = path.join(chapterDir, resource);
+    if (!fs.statSync(resourceDir).isDirectory()) {
+      return paths;
+    }
     paths[resource] = fs.readdirSync(resourceDir).map(function(file) {
       if (!/.json$/.test(file)) {
         return null;
