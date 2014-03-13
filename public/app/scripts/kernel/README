@@ -1,0 +1,3 @@
+The kernel evaluates code retrieved via the API and enforces conventions related to file types and context.
+
+A simple helper framework is included to ease the creation of scripts that render to the viewing pane (see examples directory).
