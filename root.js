@@ -11,6 +11,15 @@ var reducedir = require(path.join(lib_dir,'reducedir.js'));
 
 app.set('port', process.env.PORT || 3001);
 
+app.engine('hbs', cons.handlebars);
+app.set('view engine', 'hbs');
+
+app.get('/exampletemplate', function(res, res) {
+  res.render('example', {
+    data: 'hello'
+  });
+});
+
 // Allow reading the files directly. express.directory and express.static
 // work together to make a file browser
 app.use('/raw', express.directory('api'));
