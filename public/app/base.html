@@ -49,17 +49,31 @@
             <div class="list-wrapper">
                 <div class="list">
                     <ul>
-                        <li><img src="/img/folder.svg" /> Chapters</li>
+                        <li>
+                            <div class="icon">
+                                <img src="/img/folder.svg" /> 
+                            </div>
+                            Chapters
+                        </li>
                         <li>
                             <ul>
                                 <li ng-repeat="chapterName in chapters.submodules">
-                                    <img src="/img/folder.svg" /> <a ng-click="getChapter(chapterName)" ng-href="/chapters/{{chapterName}}">{{chapterName}}</a>
+                                    <div class="icon">
+                                        <img src="/img/folder.svg" /> 
+                                    </div>
+                                    <a ng-click="getChapter(chapterName)" ng-href="/chapters/{{chapterName}}">{{chapterName}}</a>
                                     <ul ng-show="submoduleNames[chapterName]">
                                         <li ng-repeat="submoduleName in submoduleNames[chapterName].submodules">
-                                            <img src="/img/folder.svg"><a href="/chapters/{{chapterName}}/{{submoduleName}}">{{submoduleName}}</a>
+                                            <div class="icon">
+                                                <img src="/img/folder.svg">
+                                            </div>
+                                            <a href="/chapters/{{chapterName}}/{{submoduleName}}">{{submoduleName}}</a>
                                         </li>
                                         <li ng-repeat="file in submoduleNames[chapterName].files">
-                                            <img src="/img/file.svg"><a href="/raw/api/chapters/{{chapterName}}/{{submoduleName}}{{file}}">{{file}}</a>
+                                            <div class="icon">
+                                                <img src="/img/file.svg">
+                                            </div>
+                                            <a href="/raw/api/chapters/{{chapterName}}/{{submoduleName}}{{file}}">{{file}}</a>
                                         </li>
                                     </ul>
                                 </li>
