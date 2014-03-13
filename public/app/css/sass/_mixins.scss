@@ -11,3 +11,10 @@
          -o-box-shadow: $shadows;
             box-shadow: $shadows;
 }
+
+@mixin font-smoothing($font-smoothing) { 
+  -webkit-font-smoothing: $font-smoothing;
+     -moz-font-smoothing: $font-smoothing;
+      -ms-font-smoothing: $font-smoothing;
+          font-smoothing: $font-smoothing;
+}
