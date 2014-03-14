@@ -6,8 +6,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var cons = require('consolidate');
-var lib_dir = path.join(__dirname, 'lib');
-var reducedir = require(path.join(lib_dir,'reducedir.js'));
+var reducedir = require('reduce-dir');
 
 app.set('port', process.env.PORT || 3001);
 
