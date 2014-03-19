@@ -8,6 +8,7 @@ $light_gray: lighten($gray, 50%);
 }
 
 html, body {
+    background: url("../img/lines.svg") repeat scroll 0 0 #272928;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -115,7 +116,8 @@ body {
             }
         
             .content-wrapper {
-                background: darken($gray, 1%) url(../img/grid.png);
+                background: url("../img/grid.png") repeat scroll 0 0 transparent;
+
                 margin: 0;
                 padding: 10px 0 40px 330px;
                 width: 100%;
