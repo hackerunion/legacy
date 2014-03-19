@@ -5,12 +5,24 @@ var path = require('path');
 var express = require('express');
 var path = require('path');
 var app = express();
+var cons = require('consolidate');
+var reducedir = require('reduce-dir');
+
 app.set('port', process.env.PORT || 3001);
+
+app.engine('hbs', cons.handlebars);
+app.set('view engine', 'hbs');
+
+app.get('/exampletemplate', function(res, res) {
+  res.render('example', {
+    data: 'hello'
+  });
+});
 
 // Allow reading the files directly. express.directory and express.static
 // work together to make a file browser
-app.use('/raw', express.directory(__dirname));
-app.use('/raw', express.static(__dirname));
+app.use('/raw', express.directory('api'));
+app.use('/raw', express.static('api'));
 
 // Serve static assets
 app.use('/', express.static(path.join(__dirname, '/public/app')));
@@ -26,13 +38,8 @@ app.get('/chapters', function(req, res) {
   res.sendfile('public/app/base.html');
 });
 
-// API routes
 app.get('/api/*', function(req, res) {
   generic_handler(req, res, 'api/'+req.params.join('/'));
-});
-
-app.get('/raw/*', function(req, res) {
-  res.sendfile('api/'+req.params.join('/'))
 });
 
 function sanitize(req, res, next) {
