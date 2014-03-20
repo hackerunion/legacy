@@ -11,7 +11,7 @@ $light_gray: lighten($gray, 50%);
 ::selection { background: $green; color:$gray; text-shadow: none; }
 
 html, body {
-    background: url("../img/lines.svg") repeat scroll 0 0 #272928;
+    background: url("../img/lines.svg") repeat scroll 0 0 #222;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -42,6 +42,7 @@ body {
                 width: 330px;
                 background: $gray url(../img/lines.svg);
                 border-right: 1px solid rgba(64,66,65,0.41);
+                text-shadow: 0 0 2px rgba(41, 255, 130, 0.5);
                 
                 .title-wrapper {
 
