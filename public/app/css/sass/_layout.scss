@@ -7,6 +7,9 @@ $light_gray: lighten($gray, 50%);
     box-sixing: border-box;
 }
 
+::-moz-selection { background: $green; color:$gray; text-shadow: none; }
+::selection { background: $green; color:$gray; text-shadow: none; }
+
 html, body {
     background: url("../img/lines.svg") repeat scroll 0 0 #272928;
     margin: 0;
