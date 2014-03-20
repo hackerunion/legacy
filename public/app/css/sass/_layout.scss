@@ -7,7 +7,11 @@ $light_gray: lighten($gray, 50%);
     box-sixing: border-box;
 }
 
+::-moz-selection { background: $green; color:$gray; text-shadow: none; }
+::selection { background: $green; color:$gray; text-shadow: none; }
+
 html, body {
+    background: url("../img/lines.svg") repeat scroll 0 0 #222;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -16,7 +20,6 @@ html, body {
 
 body {
     margin: 0;
-    background: darken($gray, 1%);
     color: $green;
     font-family: "Andale Mono", AndaleMono, monospace;
     @include font-smoothing(antialiased);
@@ -38,6 +41,8 @@ body {
                 height: 100%;
                 width: 330px;
                 background: $gray url(../img/lines.svg);
+                border-right: 1px solid rgba(64,66,65,0.41);
+                text-shadow: 0 0 2px rgba(41, 255, 130, 0.5);
                 
                 .title-wrapper {
 
@@ -77,7 +82,6 @@ body {
                     
                     .list {
                         height: 100%;
-                        overflow-y: scroll;
                         padding: 10px 10px 10px 0px;
                         
                         ul {
@@ -115,7 +119,8 @@ body {
             }
         
             .content-wrapper {
-                background: darken($gray, 1%) url(../img/grid.png);
+                background: url("../img/grid.png") repeat scroll 0 0 transparent;
+
                 margin: 0;
                 padding: 10px 0 40px 330px;
                 width: 100%;
@@ -123,6 +128,7 @@ body {
                 
                 .content {
                     overflow-y: auto;
+                    padding:20px;
                 }
             }
         }

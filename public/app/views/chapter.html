@@ -3,5 +3,5 @@
 <p>CHAPTER: {{chapterName}}</p>
 
 <header ng-repeat="(module, data) in subdirectories">
-  <p>{{module | uppercase}}: {{ data }}</p>
+  <p>{{module | uppercase}}: <pre>{{ data }}</pre></p>
 </header>

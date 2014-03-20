@@ -33,6 +33,11 @@ Setup
 To run the app locally, run
 
 ```bash
+# This will install a bunch of stuff:
 script/bootstrap
+
+# If you are editing SCSS:
+cd public && grunt watch
+
 node root.js
 ```
