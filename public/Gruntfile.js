@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       },
       compass: {
         files: ['app/css/{,*/}*.{scss,sass}'],
-        tasks: ['compass:server', 'autoprefixer']
+        tasks: ['compass:dist', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -285,7 +285,7 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'compass:server'
+        'compass'
       ],
       test: [
         'compass'
