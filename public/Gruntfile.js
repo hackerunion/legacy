@@ -366,6 +366,7 @@ module.exports = function (grunt) {
     'bower-install',
     'useminPrepare',
     'concurrent:dist',
+    'compass',
     'autoprefixer',
     'concat',
     'ngmin',
