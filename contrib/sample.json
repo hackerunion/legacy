@@ -1,0 +1,20 @@
+{
+  "hackerUnion": {
+    "type": "organization",
+    "hax0rStatus": "1337",
+    "members": [
+      {
+        "name": "Barry",
+        "occupation": "leet hax0r"
+      },
+      {
+        "name": "Garry",
+        "occupation": "leet secretary"
+      },
+      {
+        "name": "Larry",
+        "occupation": "leet stenographer"
+      }
+    ]
+  }
+}
