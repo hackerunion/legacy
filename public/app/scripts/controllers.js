@@ -53,7 +53,7 @@ function ChapterCntl($scope, $routeParams, HTTPService) {
 				var submodule = chapter.submodules[submodIndex];
 
 				HTTPService.getChapterSubmodule($scope.chapterName, submodule).then(function(data) {
-					$scope.subdirectories[data.module] = data.data;
+					$scope.subdirectories[data.module] = JSON.stringify(data.data, null, 4);
 				});
 			}
 		});
