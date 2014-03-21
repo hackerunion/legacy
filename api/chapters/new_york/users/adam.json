@@ -1,0 +1,9 @@
+{
+  "email": "adam@dberg.org",
+  "name": "Adam Denenberg",
+  "skills": ["things that scale", "ruby", "caching" "functional programming"],
+  "twitter": "denen",
+  "github": "denen99",
+  "projects": ["new rss parsing tool", "scalesimple"],
+  "v": 0
+}
