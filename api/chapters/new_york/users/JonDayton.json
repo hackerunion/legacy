@@ -1,0 +1,9 @@
+{
+  "email": "jondayton@gmail.com",
+  "name": "Jon Dayton",
+  "skills": ["Ruby", "Rails", "Ember.js", "Entrepreneurship", "Skiing"],
+  "twitter": "goDownhillFast",
+  "github": "goDownhillFast",
+  "projects": ["undrunk-dial", "best-laid-schemes", "law-score"],
+  "v": 0
+}
