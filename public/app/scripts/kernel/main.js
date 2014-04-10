@@ -75,7 +75,7 @@
                 return uri;
             }
 
-            var dirs = uri.split('/');
+            var dirs = (uri || '').split('/');
             var relative = false;
 
             if (dirs.length && dirs[0] == '') {
