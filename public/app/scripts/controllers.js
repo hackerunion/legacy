@@ -8,6 +8,7 @@ function BaseCntl($scope, $location, HTTPService) {
 		maps: {chapterName: submodules of chapter}
 	*/
 	$scope.submoduleNames = {};
+	$scope.chapterSubmodules = {};
 
 	var getChapters = function() {
 		HTTPService.getChapters().then(function(data) {
@@ -25,15 +26,14 @@ function BaseCntl($scope, $location, HTTPService) {
 	}
 
 	$scope.getChapterSubmodule = function(chapterName, submoduleName) {
-		console.log('getChapterSubmodule');
-		// if ($scope.chapterSubmodules[chapterName]) {
-		// 	$scope.chapterSubmodules[chapterName] = null;
-		// 	return;
-		// }
+		if ($scope.chapterSubmodules[chapterName+submoduleName]) {
+			$scope.chapterSubmodules[chapterName+submoduleName] = null;
+			return;
+		}
 
-		// HTTPService.getChapterSubmodule(chapterName).then(function(data) {
-		// 	$scope.chapterSubmodules[chapterName] = data;
-		// });
+		HTTPService.getChapterSubmodule(chapterName, submoduleName).then(function(data) {
+			$scope.chapterSubmodules[chapterName+submoduleName] = data;
+		});
 	}
 
 	var init = function() {
