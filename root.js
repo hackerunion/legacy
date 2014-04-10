@@ -34,6 +34,9 @@ app.get('/', function(req, res) {
 app.get('/chapters/:chapterName', function(req, res) {
   res.sendfile('public/app/base.html');
 });
+app.get('/chapters/:chapterName/:submoduleName', function(req, res) {
+  res.sendfile('public/app/base.html');
+});
 app.get('/chapters', function(req, res) {
   res.sendfile('public/app/base.html');
 });
