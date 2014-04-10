@@ -70,11 +70,11 @@
                                             </div>
                                             <a ng-click="getChapterSubmodule(chapterName, submoduleName)" href="/chapters/{{chapterName}}/{{submoduleName}}">{{submoduleName}}</a>
 
-                                            <!-- <ul ng-show="chapterSubmodules[chapterName]">
-                                                <li ng-repeat="chapterSubmodule in chapterSubmodules[chapterName].submodules">
+                                            <ul ng-show="chapterSubmodules[chapterName+submoduleName]">
+                                                <li ng-repeat="file in chapterSubmodules[chapterName+submoduleName].files">
                                                     <img src="/img/file.svg"><a href="/raw/api/chapters/{{chapterName}}/{{submoduleName}}/{{file}}">{{file}}</a>
                                                 </li>
-                                            </ul> -->
+                                            </ul>
                                         </li>
                                         <li ng-repeat="file in submoduleNames[chapterName].files">
                                             <div class="icon">
