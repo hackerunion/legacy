@@ -79,7 +79,7 @@
             var relative = false;
 
             if (dirs.length && dirs[0] == '') {
-                dirs = this.env.cwd.append(dirs.slice(1));
+                dirs = this.env.cwd.concat(dirs.slice(1));
             } 
             
             _.reduce(dirs, function(all, c) { if (c == '.') return all; if (c == '..') return all.slice(0, -1); return all.concat([c]); }, []);
