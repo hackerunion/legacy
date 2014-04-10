@@ -57,15 +57,16 @@
     var Kernel = klass(function(env) {
         this.env = _.extend({
             cwd: [],
-            handlers: {}
+            handlers: {},
+            helpers: {}
         }, env);
 
         this.cd(env.cwd);
     })
     .statics({
-        DEFAULT: '?',
-        DIRECT: ['raw'],
-        API: ['api']
+        DEFAULT_HANDLER: '?',
+        DIRECT_ENDPOINT: ['raw'],
+        API_ENDPOINT: ['api']
     })
     .methods({
         path: function(uri) {
@@ -88,6 +89,10 @@
 
         bind_handlers: function(handlers) {
             this.env.handlers = _.extend(this.env.handlers, handlers);
+        },
+
+        register_helper: function(name, helper) {
+            this.helpers[name] = helper;
         },
 
         dirname: function(uri) {
@@ -116,17 +121,19 @@
             var cb = cb || function() {};
 
             this.env.cwd = path;
-            this._fetch(this.API.concat(path), function(err, dir) {
+            this._fetch(this.API_ENDPOINT.concat(path), function(err, dir) {
                 if (err) {
                     return cb(err);
                 }
 
-                var tasks = _.map(_.filter(dir.files, function(f) { return !f.search(/index\./)), function(f) {
+                // find all index files in current directory and build thunks to eval each before CDing into directory
+                var index_funcs = _.map(_.filter(dir.files, function(f) { return 0 == f.search(/index\./); }), function(f) {
                     return function(cb2) { this.exec(path.concat([f]), null, cb2); };
                 });
                 
                 // TODO: install async
-                return async.parallel(tasks, function(err, data) {
+                // evaluate all index funcs (from above) in parallel (if no index functions, the callback is always invoked)
+                return async.parallel(index_funcs, function(err, data) {
                     if (err) {
                         return cb(err);
                     }
@@ -139,7 +146,7 @@
         exec: function(uri, opts, cb) {
             var path = this.path(uri);
             var file = this.filename(uri);
-            var opts =  opts || {};
+            var opts = opts || {};
             var cb = cb || function() {};
             var handlerPath;
 
@@ -148,38 +155,41 @@
                 return cb("Not executable", null); 
             }
 
-            this.fetch(this.DIRECT.concat(path), function(err, data) {
+            this._fetch(this.DIRECT_ENDPOINT.concat(path), function(err, data) {
                 if (err) {
                     return cb(err);
                 }
 
                 // check for an explicit handler
-                // TODO: ensure server api removes the # if it's there since it's invalid
-                // note, may want to use a different pattern; if has certain extension, treat as meta file
-                // and use the handler which will look for a config.json file, load that, and use it to cd into
-                // the directory, exec, and leave
+                var shebang = data.match(/#!\s*([^\n]*)([\s\S]*)/);
+                var meta = {};
 
-                // hidden files start with a "." (NOTE: index logic will need to be updated to reflect this
-                // new idea: if there's a file called ".{ filename }", it's meta data for that file and it contains json
-                // which may specify a handler
-
-                var explicit = data.match(/#!\s*([^\n]*)\s*/);
+                if (shebang) {
+                    try { 
+                        meta = JSON.parse(shebang[1]);
+                    } catch (e) {
+                        /* nop */
+                    }
+                
+                    data = shebang[2];
+                }
 
                 // attempt to lookup handler by extension, or default handler
-                if (explicit) {
-                    handlerPath = explicit[1];
+                if (meta.handler) {
+                    handlerPath = meta.handler;
                 } else if (file.suffix in this.env.handlers) {
                     handlerPath = this.env.handlers[file.suffix];
-                } else if (this.DEFAULT in this.env.handlers)  {
-                    handlerPath = this.env.handlers[this.DEFAULT]
+                } else if (this.DEFAULT_HANDLER in this.env.handlers)  {
+                    handlerPath = this.env.handlers[this.DEFAULT_HANDLER];
                 } else {
                     return cb("No handler", null);
                 }
 
                 opts['data'] = data;
-                
+                opts['meta'] = meta;
+
                 // fetch handler via api
-                this._fetch(this.DIRECT.concat(this.path(handlerPath)), function(err, src) {
+                this._fetch(this.DIRECT_ENDPOINT.concat(this.path(handlerPath)), function(err, src) {
                     if (err) {
                         return cb(err);
                     }
@@ -218,6 +228,9 @@
     // should also have a .register_helper thing, work like modules
 
     globals.$kernel = new Kernel({
-        
+        '?': function(opts, cb) {
+            console.log("EXEC:", opts.data);
+            return cb();
+        }
     });
 })(window);
