@@ -161,7 +161,7 @@
                 }
 
                 // check for an explicit handler
-                var shebang = data.match(/#!\s*([^\n]*)([\s\S]*)/);
+                var shebang = data.match(/#!\s*([^\n\r]*)([\s\S]*)/);
                 var meta = {};
 
                 if (shebang) {
