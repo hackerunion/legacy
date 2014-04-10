@@ -227,7 +227,7 @@
     // NOTE: helpers should be encapsulated in the kernel somehow; .helpers?
     // should also have a .register_helper thing, work like modules
 
-    globals.$kernel = new Kernel({
+    global.$kernel = new Kernel({
         '?': function(opts, cb) {
             console.log("EXEC:", opts.data);
             return cb();
