@@ -1,59 +1,4 @@
 (function(global) {
-    var withScripts = function(srcList, callback) {
-        var numScripts = srcList.length;
-        var numLoaded = 0;
-        var scriptLoaded = function() {
-            numLoaded++;
-            if (numLoaded === numScripts) {
-                callback();
-            }
-        };
-
-        for (var i=0; i<numScripts; i++) {
-            var script_tag = document.createElement('script');
-
-            script_tag.setAttribute("type","text/javascript");
-            script_tag.setAttribute("src", srcList[i]);
-
-            if (script_tag.readyState) {
-                script_tag.onreadystatechange = function() { // For old versions of IE
-                    if (this.readyState == 'complete' || this.readyState == 'loaded') {
-                        scriptLoaded();
-                    }
-                };
-            } else {
-                script_tag.onload = scriptLoaded;
-            }
-
-            // Try to find the head, otherwise default to the documentElement
-            (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script_tag);
-        }
-
-        if (!numScripts) {
-            callback();
-        }
-    };
-
-    var withStyleSheets = function(srcList, callback) {
-        for (var i=0; i<srcList.length; i++) {
-            if (document.createStyleSheet) {
-                document.createStyleSheet(srcList[i]);
-            } else {
-                var ss = document.createElement("link");
-                ss.type = "text/css";
-                ss.rel = "stylesheet";
-                ss.href = srcList[i];
-                document.getElementsByTagName("head")[0].appendChild(ss);
-            }
-        }
-        if (callback) { callback(); }
-    };
-
-    var loadDependencies = function(scripts, styles, callback) {
-        withStyleSheets(styles);
-        withScripts(scripts, callback);
-    };
-
     var Kernel = klass(function(env) {
         this.env = _.extend({
             cwd: [],
@@ -66,7 +11,62 @@
     .statics({
         DEFAULT_HANDLER: '?',
         DIRECT_ENDPOINT: ['raw'],
-        API_ENDPOINT: ['api']
+        API_ENDPOINT: ['api'],
+
+        withScripts: function(srcList, callback) {
+            var numScripts = srcList.length;
+            var numLoaded = 0;
+            var scriptLoaded = function() {
+                numLoaded++;
+                if (numLoaded === numScripts) {
+                    callback();
+                }
+            };
+    
+            for (var i=0; i<numScripts; i++) {
+                var script_tag = document.createElement('script');
+    
+                script_tag.setAttribute("type","text/javascript");
+                script_tag.setAttribute("src", srcList[i]);
+    
+                if (script_tag.readyState) {
+                    script_tag.onreadystatechange = function() { // For old versions of IE
+                        if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                            scriptLoaded();
+                        }
+                    };
+                } else {
+                    script_tag.onload = scriptLoaded;
+                }
+    
+                // Try to find the head, otherwise default to the documentElement
+                (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script_tag);
+            }
+    
+            if (!numScripts) {
+                callback();
+            }
+        },
+    
+        withStyleSheets: function(srcList, callback) {
+            for (var i=0; i<srcList.length; i++) {
+                if (document.createStyleSheet) {
+                    document.createStyleSheet(srcList[i]);
+                } else {
+                    var ss = document.createElement("link");
+                    ss.type = "text/css";
+                    ss.rel = "stylesheet";
+                    ss.href = srcList[i];
+                    document.getElementsByTagName("head")[0].appendChild(ss);
+                }
+            }
+            if (callback) { callback(); }
+        },
+    
+        loadDependencies: function(scripts, styles, callback) {
+            withStyleSheets(styles);
+            withScripts(scripts, callback);
+        }
     })
     .methods({
         path: function(uri) {
@@ -112,23 +112,24 @@
             return { basename: file[0], suffix: file[1].toLowerCase(), special: false };
         },
 
-        uri: function(path) {
-            return '/' + this.path(path).join('/');
+        uri: function(path, dir) {
+            return '/' + this.path(path).join('/') + (dir ? '/' : '');
         },
 
         cd: function(uri, cb) {
-            var path = this.path(uri);
-            var cb = cb || function() {};
+            var kernel = this;
+            var path = kernel.path(uri);
+            var cb = cb || function(err, v) { console.log("cd()", "error:", err, "value:", v); };
 
-            this.env.cwd = path;
-            this._fetch(this.API_ENDPOINT.concat(path), function(err, dir) {
+            kernel.env.cwd = path;
+            kernel._fetch(Kernel.API_ENDPOINT.concat(path), function(err, dir) {
                 if (err) {
                     return cb(err);
                 }
 
                 // find all index files in current directory and build thunks to eval each before CDing into directory
                 var index_funcs = _.map(_.filter(dir.files, function(f) { return 0 == f.search(/index\./); }), function(f) {
-                    return function(cb2) { this.exec(path.concat([f]), null, cb2); };
+                    return function(cb2) { kernel.exec(path.concat([f]), null, cb2); };
                 });
                 
                 // TODO: install async
@@ -138,16 +139,17 @@
                         return cb(err);
                     }
                     
-                    this._cd(path, cb);          
+                    kernel._cd(path, cb);          
                 });
-            });
+            }, true);
         },
         
         exec: function(uri, opts, cb) {
-            var path = this.path(uri);
-            var file = this.filename(uri);
+            var kernel = this;
+            var path = kernel.path(uri);
+            var file = kernel.filename(uri);
             var opts = opts || {};
-            var cb = cb || function() {};
+            var cb = cb || function(err, v) { console.log("exec()", "error:", err, "value:", v); };
             var handlerPath;
 
             // can't execute special files like "." and ".."
@@ -155,7 +157,7 @@
                 return cb("Not executable", null); 
             }
 
-            this._fetch(this.DIRECT_ENDPOINT.concat(path), function(err, data) {
+            kernel._fetch(Kernel.DIRECT_ENDPOINT.concat(path), function(err, data) {
                 if (err) {
                     return cb(err);
                 }
@@ -177,10 +179,10 @@
                 // attempt to lookup handler by extension, or default handler
                 if (meta.handler) {
                     handlerPath = meta.handler;
-                } else if (file.suffix in this.env.handlers) {
-                    handlerPath = this.env.handlers[file.suffix];
-                } else if (this.DEFAULT_HANDLER in this.env.handlers)  {
-                    handlerPath = this.env.handlers[this.DEFAULT_HANDLER];
+                } else if (file.suffix in kernel.env.handlers) {
+                    handlerPath = kernel.env.handlers[file.suffix];
+                } else if (Kernel.DEFAULT_HANDLER in kernel.env.handlers)  {
+                    handlerPath = kernel.env.handlers[Kernel.DEFAULT_HANDLER];
                 } else {
                     return cb("No handler", null);
                 }
@@ -189,7 +191,7 @@
                 opts['meta'] = meta;
 
                 // fetch handler via api
-                this._fetch(this.DIRECT_ENDPOINT.concat(this.path(handlerPath)), function(err, src) {
+                kernel._fetch(Kernel.DIRECT_ENDPOINT.concat(kernel.path(handlerPath)), function(err, src) {
                     if (err) {
                         return cb(err);
                     }
@@ -197,14 +199,14 @@
                     var handler = window.eval.call(window, src);
                     
                     handler(opts, function() {
-                        this._exec(path, opts, cb);
+                        kernel._exec(path, opts, cb);
                     });
                 });
             });
         },
 
-        _fetch: function(path, cb) {
-            $.get(this.uri(path))
+        _fetch: function(path, cb, dir) {
+            $.get(this.uri(path, dir))
              .done(function(data) { cb(null, data); })
              .fail(function() { cb("Fetch failed", null); });
         },
@@ -229,7 +231,7 @@
 
     global.$kernel = new Kernel({
         '?': function(opts, cb) {
-            console.log("EXEC:", opts.data);
+            console.log("default-handler", opts.data);
             return cb();
         }
     });

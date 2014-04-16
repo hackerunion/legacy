@@ -4,7 +4,6 @@ set -e
 
 npm install
 
-
 cd public
 
 npm install
@@ -17,5 +16,10 @@ bundle install
 
 npm install -g grunt-cli
 grunt build
+
+# copy bower-installed scripts to lib folder
+cp app/bower_components/underscore/underscore.js app/scripts/lib/
+cp app/bower_components/async/lib/async.js app/scripts/lib/
+cp app/bower_components/klass/klass.min.js app/scripts/lib/klass.js
 
 cd -
